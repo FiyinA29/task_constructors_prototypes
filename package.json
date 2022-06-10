@@ -1,0 +1,22 @@
+{
+  "name": "task_constructors_prototypes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FiyinA29/lab_constructors_prototypes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FiyinA29/lab_constructors_prototypes/issues"
+  },
+  "homepage": "https://github.com/FiyinA29/lab_constructors_prototypes#readme",
+  "devDependencies": {
+    "jest": "^28.1.0"
+  }
+}
