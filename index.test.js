@@ -1,7 +1,8 @@
 
 const {
     Car,
-    Dealership
+    Dealership,
+    Customer
 } = require(".");
 
 describe('car properties', () => {
@@ -30,8 +31,10 @@ describe('dealership properties and methods', () => {
     let car3 = new Car("Mercedes", 36000, "4.0L twin-turbocharged V8");
     let car4 = new Car("Jaguar", 38000, "5.3L naturally-aspirated V12");
     let car5 = new Car("Range Rover", 40000, "6.2L naturally-aspirated V8 LT1");
-    let car6 = new Car("Audi", 50000, "5.7L naturally-aspirated V10")
-    let dealership = new Dealership("WheelsLTD", 50,[car1, car2, car3, car4, car5]);
+    let car6 = new Car("Audi", 50000, "5.7L naturally-aspirated V10");
+    let car7 = new Car("Ford ST", 25000, "v8");
+
+    let dealership = new Dealership("WheelsLTD", 6,[car1, car2, car3, car4, car5]);
 
     test('can get name', () => {
         expected = "WheelsLTD";
@@ -39,7 +42,7 @@ describe('dealership properties and methods', () => {
         expect(actual).toBe(expected);
     });
     test('can get capacity', () => {
-        expected = 50;
+        expected = 6;
         actual = dealership.capactiy;
         expect(actual).toBe(expected);
     });
@@ -48,8 +51,15 @@ describe('dealership properties and methods', () => {
         actual = dealership.stockCount();
         expect(actual).toBe(expected);
     });
-    test('can add car to stock', () => {
+        test('can add car to stock', () => {
         dealership.addCarToStock(car6)
+
+        expected = 6;
+        actual = dealership.stockCount();
+        expect(actual).toBe(expected);
+    });
+    test('cannot add car to stock', () => {
+        dealership.addCarToStock(car7)
 
         expected = 6;
         actual = dealership.stockCount();
@@ -68,6 +78,40 @@ describe('dealership properties and methods', () => {
     test('can calculate total value of stock', () => {
         expected = 230000
         actual = dealership.gettotalValue();
+        expect(actual).toBe(expected);
+    });
+});
+
+describe('customer properties', () => {
+    let customer = new Customer("Bruce Lee", 40000)
+
+    let car1 = new Car("Range Rover", 40000, "6.2L naturally-aspirated V8 LT1");
+    let car2 = new Car("Audi", 50000, "5.7L naturally-aspirated V10")
+
+    let dealership = new Dealership("WheelsLTD", 6,[car1, car2]);
+
+    test('can get name', () => {
+        expected = "Bruce Lee";
+        actual = customer.name;
+        expect(actual).toBe(expected);
+    });
+    test('can get wallet', () => {
+        expected = 40000;
+        actual = customer.wallet;
+        expect(actual).toBe(expected);
+    });
+    test('cannot afford a car', () => {
+        customer.buyCar(car2,dealership)
+
+        expected = 2;
+        actual = dealership.stockCount();
+        expect(actual).toBe(expected);
+    });
+    test('can buy a car', () => {
+        customer.buyCar(car1,dealership)
+
+        expected = 1;
+        actual = dealership.stockCount();
         expect(actual).toBe(expected);
     });
 });

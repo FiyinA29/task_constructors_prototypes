@@ -21,7 +21,9 @@ Dealership.prototype.stockCount = function () {
 
 //add car to stock
 Dealership.prototype.addCarToStock = function (car) {
-    this.stock.push(car);
+    if(this.stock.length < this.capactiy){
+        this.stock.push(car);
+    }
 }
 
 //return an array of each car's manufacturer
@@ -47,10 +49,27 @@ Dealership.prototype.gettotalValue = function () {
     return totalValue;
 }
 
+//CUSTOMER CONSTRUCTOR
+const Customer = function (name, wallet) {
+    this.name = name;
+    this.wallet = wallet;
+    this.car = null;
+}
 
+//CUSTOMER METHOD
+// customer can buy a car
+Customer.prototype.buyCar = function (car, dealership) {
+    let soldCar = dealership.stock.findIndex(obj => obj == car);
+
+    if(this.wallet >= car.price) {
+        this.car = car;
+        dealership.stock.splice(soldCar,1);
+    }
+}
 
 
 module.exports = {
     Car,
-    Dealership
+    Dealership,
+    Customer
 }
